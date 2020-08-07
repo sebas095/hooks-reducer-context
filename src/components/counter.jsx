@@ -51,7 +51,7 @@ const CountStyled = styled.div`
 
 const Counter = () => {
   const { state, dispatch } = useContext(Context);
-  const { count } = state;
+  const { count } = state.counter;
 
   return (
     <CountContainer>
