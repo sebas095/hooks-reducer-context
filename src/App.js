@@ -1,8 +1,11 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Counter from "./components/counter";
 import Store from "./store/store";
+import Menu from "./components/menu";
+import Counter from "./components/counter";
+import Chronometer from "./components/chronometer";
 
 const GloablStyle = createGlobalStyle`
  body {
@@ -19,7 +22,21 @@ const App = () => {
     <>
       <GloablStyle />
       <Store>
-        <Counter />
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Menu />
+            </Route>
+
+            <Route path="/counter">
+              <Counter />
+            </Route>
+
+            <Route path="/chrono">
+              <Chronometer />
+            </Route>
+          </Switch>
+        </Router>
       </Store>
     </>
   );
