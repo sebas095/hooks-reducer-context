@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { generate as id } from "shortid";
 import styled from "styled-components";
+
+import { Context } from "../store/store";
+import { start, stop, reset, timestamp, updateTime } from "../store/actions";
 
 import chronoImg from "../img/chrono.png";
 
@@ -43,33 +46,25 @@ const Item = styled.li`
 `;
 
 const Chronometer = () => {
-  const [clock, setClock] = useState({
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-    miliseconds: 0,
-  });
-
-  const [running, setRunning] = useState(false);
-  const [allTimestamps, setAllTimestamps] = useState([]);
-  const [started, setStarted] = useState(false);
+  const { state, dispatch } = useContext(Context);
+  let {
+    hours,
+    minutes,
+    seconds,
+    miliseconds,
+    allTimestamps,
+    started,
+    running,
+  } = state.chrono;
 
   useEffect(() => {
     if (running) {
       const interval = setInterval(tick, 100);
       return () => clearInterval(interval);
     }
-  }, [running, clock]);
-
-  const handleStartClick = () => {
-    if (!running) {
-      setRunning(true);
-      setStarted(true);
-    }
-  };
+  }, [running]);
 
   const tick = () => {
-    let { hours, minutes, seconds, miliseconds } = clock;
     miliseconds++;
 
     if (miliseconds === 10) {
@@ -87,73 +82,46 @@ const Chronometer = () => {
       hours++;
     }
 
-    updateTimer(hours, minutes, seconds, miliseconds);
-  };
-
-  const handleStopClick = () => {
-    if (running) {
-      setRunning(false);
-    }
-  };
-
-  const handleTimestamp = () => {
-    const timestamp = {
-      hours: clock.hours,
-      minutes: clock.minutes,
-      seconds: clock.seconds,
-      miliseconds: clock.miliseconds,
-    };
-
-    setAllTimestamps([...allTimestamps, timestamp]);
-  };
-
-  const handleReset = () => {
-    updateTimer(0, 0, 0, 0);
-    setAllTimestamps([]);
-    setStarted(false);
-  };
-
-  const updateTimer = (hours, minutes, seconds, miliseconds) => {
-    setClock({ hours, minutes, seconds, miliseconds });
+    dispatch(updateTime(hours, minutes, seconds, miliseconds));
   };
 
   const addZero = (value) => (value < 10 ? `0${value}` : value);
 
-  let { hours, minutes, seconds, miliseconds } = clock;
-
-  hours = addZero(hours);
-  minutes = addZero(minutes);
-  seconds = addZero(seconds);
-  miliseconds = addZero(miliseconds);
-
   return (
     <Container>
       <Img src={chronoImg} alt="Chrono" />
-      <Time>{`${hours} : ${minutes} : ${seconds} : ${miliseconds}`}</Time>
-      <Button disabled={running} onClick={handleStartClick}>
+      <Time>
+        {` 
+          ${addZero(hours)} : 
+          ${addZero(minutes)} : 
+          ${addZero(seconds)} : 
+          ${addZero(miliseconds)}
+        `}
+      </Time>
+      <Button disabled={running} onClick={() => dispatch(start())}>
         START
       </Button>
-      <Button disabled={!running} onClick={handleStopClick}>
+      <Button disabled={!running} onClick={() => dispatch(stop())}>
         STOP
       </Button>
-      <Button disabled={!running} onClick={handleTimestamp}>
+      <Button disabled={!running} onClick={() => dispatch(timestamp())}>
         TIMESTAMP
       </Button>
       {started && (
-        <Button disabled={running} onClick={handleReset}>
+        <Button disabled={running} onClick={() => dispatch(reset())}>
           RESET
         </Button>
       )}
 
       <List>
-        {allTimestamps.map((timestamp, idx) => (
+        {allTimestamps.map((time, idx) => (
           <Item key={id()}>
             {`
               ${idx + 1} - 
-              ${addZero(timestamp.hours)} : 
-              ${addZero(timestamp.minutes)} : 
-              ${addZero(timestamp.seconds)} :
-              ${addZero(timestamp.miliseconds)}
+              ${addZero(time.hours)} : 
+              ${addZero(time.minutes)} : 
+              ${addZero(time.seconds)} :
+              ${addZero(time.miliseconds)}
             `}
           </Item>
         ))}
