@@ -58,12 +58,8 @@ const Menu = () => (
   <Container>
     <Img src={reactHooksImg} alt="React Hooks" />
     <MenuContainer>
-      <LinkStyled to="/counter">
-        <span>Counter</span>
-      </LinkStyled>
-      <LinkStyled to="/chrono">
-        <span>Chronometer</span>
-      </LinkStyled>
+      <LinkStyled to="/counter">Counter</LinkStyled>
+      <LinkStyled to="/chrono">Chronometer</LinkStyled>
     </MenuContainer>
   </Container>
 );
