@@ -18,10 +18,9 @@ const GloablStyle = createGlobalStyle`
 `;
 
 const Container = styled.div`
-  width: 100vw;
+  width: 95vw;
   display: inline-block;
   text-align: left;
-  margin-left: 10px;
   margin-top: 10px;
 `;
 
@@ -40,7 +39,7 @@ const App = () => {
     <>
       <GloablStyle />
       <Store>
-        {location.pathname !== process.env.REACT_APP_BASENAME && (
+        {location.pathname !== "/" && (
           <Container>
             <Back to="/"> 🔙 </Back>
           </Container>
