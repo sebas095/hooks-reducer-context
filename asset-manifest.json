@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/hooks-reducer-context/static/js/main.141039d4.chunk.js",
-    "main.js.map": "/hooks-reducer-context/static/js/main.141039d4.chunk.js.map",
+    "main.js": "/hooks-reducer-context/static/js/main.244a1b55.chunk.js",
+    "main.js.map": "/hooks-reducer-context/static/js/main.244a1b55.chunk.js.map",
     "runtime-main.js": "/hooks-reducer-context/static/js/runtime-main.e0d7b447.js",
     "runtime-main.js.map": "/hooks-reducer-context/static/js/runtime-main.e0d7b447.js.map",
     "static/js/2.c4daaff8.chunk.js": "/hooks-reducer-context/static/js/2.c4daaff8.chunk.js",
     "static/js/2.c4daaff8.chunk.js.map": "/hooks-reducer-context/static/js/2.c4daaff8.chunk.js.map",
     "index.html": "/hooks-reducer-context/index.html",
-    "precache-manifest.0d6381305c745f423728abf9ee152403.js": "/hooks-reducer-context/precache-manifest.0d6381305c745f423728abf9ee152403.js",
+    "precache-manifest.ade12aebcae7b6e1c345ab0a677a7158.js": "/hooks-reducer-context/precache-manifest.ade12aebcae7b6e1c345ab0a677a7158.js",
     "service-worker.js": "/hooks-reducer-context/service-worker.js",
     "static/js/2.c4daaff8.chunk.js.LICENSE.txt": "/hooks-reducer-context/static/js/2.c4daaff8.chunk.js.LICENSE.txt",
     "static/media/chrono.png": "/hooks-reducer-context/static/media/chrono.ef6f7de5.png",
@@ -16,6 +16,6 @@
   "entrypoints": [
     "static/js/runtime-main.e0d7b447.js",
     "static/js/2.c4daaff8.chunk.js",
-    "static/js/main.141039d4.chunk.js"
+    "static/js/main.244a1b55.chunk.js"
   ]
 }
