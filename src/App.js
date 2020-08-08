@@ -1,6 +1,6 @@
 import React from "react";
-import { createGlobalStyle } from "styled-components";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import styled, { createGlobalStyle } from "styled-components";
+import { Switch, Route, Link, useLocation } from "react-router-dom";
 
 import Store from "./store/store";
 import Menu from "./components/menu";
@@ -17,26 +17,47 @@ const GloablStyle = createGlobalStyle`
   }
 `;
 
+const Container = styled.div`
+  width: 100vw;
+  display: inline-block;
+  text-align: left;
+  margin-left: 10px;
+  margin-top: 10px;
+`;
+
+const Back = styled(Link)`
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  text-decoration: none;
+  color: #3f93ff;
+  font-weight: bold;
+  font-size: 1.5rem;
+`;
+
 const App = () => {
+  const location = useLocation();
+
   return (
     <>
       <GloablStyle />
       <Store>
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <Menu />
-            </Route>
+        {location.pathname !== "/" && (
+          <Container>
+            <Back to="/"> 🔙 </Back>
+          </Container>
+        )}
+        <Switch>
+          <Route exact path="/">
+            <Menu />
+          </Route>
 
-            <Route path="/counter">
-              <Counter />
-            </Route>
+          <Route path="/counter">
+            <Counter />
+          </Route>
 
-            <Route path="/chrono">
-              <Chronometer />
-            </Route>
-          </Switch>
-        </Router>
+          <Route path="/chrono">
+            <Chronometer />
+          </Route>
+        </Switch>
       </Store>
     </>
   );
