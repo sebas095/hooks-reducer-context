@@ -40,7 +40,7 @@ const App = () => {
     <>
       <GloablStyle />
       <Store>
-        {location.pathname !== "/" && (
+        {location.pathname !== process.env.REACT_APP_BASENAME && (
           <Container>
             <Back to="/"> 🔙 </Back>
           </Container>
