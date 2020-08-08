@@ -7,7 +7,7 @@ import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+    <Router basename={process.env.REACT_APP_BASENAME}>
       <App />
     </Router>
   </React.StrictMode>,
