@@ -1,5 +1,6 @@
 import React, { createContext, useReducer, useMemo } from "react";
 
+import { combineReducers } from "../utils/combine-reducers";
 import counterReducer from "./reducers/counter.reducer";
 import chronoReducer from "./reducers/chrono.reducer";
 
@@ -18,10 +19,15 @@ const initialState = {
   },
 };
 
+const rootReducer = combineReducers({
+  counter: counterReducer,
+  chrono: chronoReducer,
+});
+
 export const Context = createContext();
 
 const Store = ({ children }) => {
-  const [state, dispatch] = useReducer(chronoReducer, initialState);
+  const [state, dispatch] = useReducer(rootReducer, initialState);
 
   // Performance Concerns
   const contextValue = useMemo(() => {
